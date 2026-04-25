@@ -1,12 +1,17 @@
-const getHighResTime = () => {
-	switch (true) {
-		case typeof process !== 'undefined' && !!process.hrtime?.bigint:
-			return process.hrtime.bigint();
-		case typeof performance !== 'undefined' && !!performance.now:
-			return BigInt(Math.floor(performance.now() * 1000000));
-		default:
-			return BigInt(Date.now() * 1000000);
+const nodeTimeNs = (): bigint => process.hrtime.bigint();
+const browserTimeNs = (): bigint => BigInt(Math.floor(performance.now() * 1_000_000));
+const fallbackTimeNs = (): bigint => BigInt(Date.now() * 1_000_000);
+
+const getHighResTime = (): bigint => {
+	if (typeof process !== 'undefined' && typeof process.hrtime?.bigint === 'function') {
+		return nodeTimeNs();
 	}
+
+	if (typeof performance !== 'undefined' && typeof performance.now === 'function') {
+		return browserTimeNs();
+	}
+
+	return fallbackTimeNs();
 };
 
 console.log(getHighResTime());

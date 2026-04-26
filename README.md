@@ -14,28 +14,6 @@ A small TypeScript/Node.js utility that generates a cryptographically secure ran
 npm install
 ```
 
-## Development
-
-Run in watch mode:
-
-```bash
-npm run dev
-```
-
-Build TypeScript output:
-
-```bash
-npm run build
-```
-
-Run compiled output:
-
-```bash
-npm start
-```
-
-## API
-
 ### `getRandomInt(length: number): bigint`
 
 Generates a random integer with exactly `length` decimal digits (except `length = 1`, which may return `0`-`9`).
@@ -63,3 +41,4 @@ console.log(oneDigit, sixDigits);
 
 - Project output is configured to compile from `src` to `dist`.
 - Current module format is CommonJS.
+

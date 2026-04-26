@@ -21,7 +21,7 @@ const rejectSamples = (upperExclusive: bigint): bigint => {
 	}
 };
 
-const getRandomInt = (length: number): bigint => {
+export const getRandomInt = (length: number): bigint => {
 	if (!Number.isInteger(length)) {
 		throw new TypeError('getRandomInt(length) expects an integer argument (length: number).');
 	}
@@ -36,5 +36,3 @@ const getRandomInt = (length: number): bigint => {
 	const randomOffset = rejectSamples(range);
 	return min + randomOffset;
 };
-
-module.exports = { getRandomInt };

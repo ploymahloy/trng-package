@@ -2,7 +2,7 @@ const { randomBytes } = require('node:crypto') as {
 	randomBytes: (size: number) => Buffer;
 };
 
-const randomBigIntBelow = (upperExclusive: bigint): bigint => {
+const rejectSamples = (upperExclusive: bigint): bigint => {
 	if (upperExclusive <= 0n) {
 		throw new RangeError('upperExclusive must be greater than 0.');
 	}
@@ -33,7 +33,7 @@ const getRandomInt = (length: number): bigint => {
 	const min = length === 1 ? 0n : 10n ** BigInt(length - 1);
 	const maxExclusive = 10n ** BigInt(length);
 	const range = maxExclusive - min;
-	const randomOffset = randomBigIntBelow(range);
+	const randomOffset = rejectSamples(range);
 	return min + randomOffset;
 };
 

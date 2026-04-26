@@ -1,6 +1,4 @@
-const { randomBytes } = require('node:crypto') as {
-	randomBytes: (size: number) => Buffer;
-};
+import { randomBytes } from 'node:crypto';
 
 const rejectSamples = (upperExclusive: bigint): bigint => {
 	if (upperExclusive <= 0n) {

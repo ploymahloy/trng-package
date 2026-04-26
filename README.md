@@ -11,7 +11,7 @@ A small TypeScript/Node.js utility that generates a cryptographically secure ran
 ## Install
 
 ```bash
-npm install
+npm i trng-crypto
 ```
 
 ### `getRandomInt(length: number): bigint`
@@ -29,7 +29,16 @@ Throws:
 ## Usage
 
 ```ts
-const { getRandomInt } = require('./dist/index');
+import { getRandomInt } from 'trng-crypto';
+
+const oneDigit = getRandomInt(1); // 0n to 9n
+const sixDigits = getRandomInt(6); // 100000n to 999999n
+
+console.log(oneDigit, sixDigits);
+```
+
+```js
+const { getRandomInt } = require('trng-crypto');
 
 const oneDigit = getRandomInt(1); // 0n to 9n
 const sixDigits = getRandomInt(6); // 100000n to 999999n
@@ -39,6 +48,5 @@ console.log(oneDigit, sixDigits);
 
 ## Notes
 
-- Project output is configured to compile from `src` to `dist`.
-- Current module format is CommonJS.
+- Project output is configured to compile from `src` to dual outputs in `dist/cjs` and `dist/esm`.
 

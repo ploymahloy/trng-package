@@ -1,11 +1,10 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "noEmit": true,
+    "outDir": "dist/esm",
     "module": "es2020",
     "moduleResolution": "bundler",
-    "declaration": false,
-    "declarationMap": false
+    "declaration": true
   },
   "include": ["src/**/*.ts"]
 }

@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const { randomBytes } = require('node:crypto');
+import { randomBytes } from 'node:crypto';
 const rejectSamples = (upperExclusive) => {
     if (upperExclusive <= 0n) {
         throw new RangeError('upperExclusive must be greater than 0.');
@@ -17,7 +15,7 @@ const rejectSamples = (upperExclusive) => {
         }
     }
 };
-const getRandomInt = (length) => {
+export const getRandomInt = (length) => {
     if (!Number.isInteger(length)) {
         throw new TypeError('getRandomInt(length) expects an integer argument (length: number).');
     }
@@ -30,5 +28,4 @@ const getRandomInt = (length) => {
     const randomOffset = rejectSamples(range);
     return min + randomOffset;
 };
-module.exports = { getRandomInt };
 //# sourceMappingURL=index.js.map

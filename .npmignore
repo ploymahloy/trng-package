@@ -1,0 +1,15 @@
+src/
+node_modules/
+
+.git/
+.gitignore
+.cursor/
+.cursorignore
+
+tsconfig.json
+*.tsbuildinfo
+
+package-lock.json
+
+terminals/
+agent-transcripts/

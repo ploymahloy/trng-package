@@ -19,18 +19,26 @@ const rejectSamples = (upperExclusive: bigint): bigint => {
 	}
 };
 
-export const getRandomInt = (length: number): bigint => {
-	if (!Number.isInteger(length)) {
-		throw new TypeError('getRandomInt(length) expects an integer argument (length: number).');
+export function getRandomInt(desiredOutputLength: number, options: { type: 'string' }): string;
+export function getRandomInt(desiredOutputLength: number, options?: { type?: 'bigint' }): bigint;
+export function getRandomInt(desiredOutputLength: number, options?: { type?: 'string' | 'bigint' }): bigint | string {
+	if (!Number.isInteger(desiredOutputLength)) {
+		throw new TypeError('getRandomInt(desiredOutputLength) expects an integer argument (desiredOutputLength: number).');
 	}
 
-	if (length < 1) {
+	if (desiredOutputLength < 1) {
 		throw new RangeError('getRandomInt(length) expects length to be at least 1.');
 	}
 
-	const min = length === 1 ? 0n : 10n ** BigInt(length - 1);
-	const maxExclusive = 10n ** BigInt(length);
+	const outputType = options?.type ?? 'bigint';
+	if (outputType !== 'string' && outputType !== 'bigint') {
+		throw new TypeError('getRandomInt(desiredOutputLength, options) expects options.type to be "string" or "bigint".');
+	}
+
+	const min = desiredOutputLength === 1 ? 0n : 10n ** BigInt(desiredOutputLength - 1);
+	const maxExclusive = 10n ** BigInt(desiredOutputLength);
 	const range = maxExclusive - min;
 	const randomOffset = rejectSamples(range);
-	return min + randomOffset;
-};
+	const result = min + randomOffset;
+	return outputType === 'string' ? result.toString() : result;
+}
